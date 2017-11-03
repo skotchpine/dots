@@ -1,0 +1,10 @@
+#!/bin/sh
+
+rm ~/.vim/manifest
+
+o=$(pwd)
+for x in ~/.vim/bundle/*; do
+	cd $x
+	git remote get-url origin >> ~/.vim/manifest
+done
+cd $o

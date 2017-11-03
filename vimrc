@@ -105,6 +105,8 @@ nnoremap <leader><leader> :w<Return>
 
 " kill buffer
 nnoremap <leader>q :q<Return>
+" super kill buffer
+nnoremap <leader>Q :q!<Return>
 
 " edit vimrc
 nnoremap <leader>v :vsplit $MYVIMRC<Return>
@@ -145,10 +147,10 @@ nnoremap <leader>n :tabnew<Return>
 nnoremap <leader>N :tabnew<Return>:e 
 
 " turn highlighting on and off
-nnoremap <leader>/ :set hlsearch!<Return>
+nnoremap <leader>3 :set hlsearch!<Return>
 
 " turn list mode on and off
-nnoremap <leader>? :set list!<Return>
+nnoremap <leader>4 :set list!<Return>
 
 " turn number mode on and off
 nnoremap <leader>1 :set number!<Return>
@@ -161,6 +163,10 @@ nnoremap <leader><Tab> :set expandtab!<Return>
 
 " show digraphs
 nnoremap <leader>` :digraphs<Return>
+
+" tcomment line
+nnoremap <leader>/ :TComment<Return>
+nnoremap <leader>? :TCommentBlock<Return>
 
 " surround things
 nnoremap <leader>"  viw<Esc>a"<Esc>bi"<Esc>lel
@@ -181,6 +187,9 @@ vnoremap K <Esc>:m '<-2<Return>gv=gv
 imap jj <Esc>
 
 set noexpandtab
-set listchars=tab:\ ▶,trail:·,eol:‾
+set listchars=tab:░▒,trail:·,eol:‾,nbsp:·
 set laststatus=2
 set list
+
+let g:ranger_map_keys = 0
+map <leader>r :Ranger<Return>

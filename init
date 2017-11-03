@@ -1,0 +1,19 @@
+#!/bin/sh
+
+git clone https://github.com/skotchpine/dots ~/dots
+[[ $? == 0 ]] || exit 1
+
+mkdir -p ~/.vim/{autoload,bundle}
+
+cp ~/dots/vimrc ~/.vim
+cp ~/dots/bundleup ~/.vim
+sudo rm -r ~/dots
+
+curl -o ~/.vim/autoload/pathogen.vim https://raw.githubusercontent/tpope/pathogen.vim
+
+origin=$(pwd)
+cd ~/.vim/bundle; {
+	for repo in $(cat ~/.vim/bundleup); do
+		git clone $repo
+	done
+} cd $origin
