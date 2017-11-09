@@ -9,7 +9,7 @@ cp ~/dots/vimrc ~/.vim
 cp ~/dots/manifest ~/.vim
 sudo rm -r ~/dots
 
-curl -o ~/.vim/autoload/pathogen.vim https://raw.githubusercontent/tpope/pathogen.vim
+curl -o ~/.vim/autoload/pathogen.vim https://raw.githubusercontent.com/tpope/vim-pathogen/master/autoload/pathogen.vim
 
 origin=$(pwd)
 cd ~/.vim/bundle; {

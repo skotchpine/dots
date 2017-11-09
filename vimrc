@@ -39,10 +39,14 @@ set tabstop=2
 " set softtabstop=2
 
 """ Indentation specs
-autocmd FileType python setlocal expandtab shiftwidth=4 tabstop=4
-autocmd FileType js     setlocal expandtab shiftwidth=2 tabstop=2
-autocmd FileType html   setlocal expandtab shiftwidth=2 tabstop=2
-autocmd FileType css    setlocal expandtab shiftwidth=2 tabstop=2
+autocmd FileType python  setlocal expandtab shiftwidth=4 tabstop=4
+autocmd FileType haskell setlocal expandtab shiftwidth=4 tabstop=4
+autocmd FileType js      setlocal expandtab shiftwidth=2 tabstop=2
+autocmd FileType html    setlocal expandtab shiftwidth=2 tabstop=2
+autocmd FileType ruby    setlocal expandtab shiftwidth=2 tabstop=2
+autocmd FileType go      setlocal noexpandtab shiftwidth=2 tabstop=2
+autocmd FileType c       setlocal noexpandtab shiftwidth=2 tabstop=2
+autocmd FileType objc    setlocal noexpandtab shiftwidth=2 tabstop=2
 
 " break lines automatically
 set linebreak
@@ -127,14 +131,18 @@ nnoremap <leader>D <C-W>K
 nnoremap <leader>F <C-W>L
 
 " new above
-nnoremap <leader>g :split<Return><C-W>j
-" new above and edit
-nnoremap <leader>g :split<Return><C-W>j:e 
+nnoremap <leader>G :split<Return><C-W>j
+" new above via edit
+nnoremap <leader>ge :split<Return><C-W>j:e 
+" new above via ranger
+nnoremap <leader>gr :split<Return><C-W>j:Ranger<Return>
 
 " new right
-nnoremap <leader>h :vsplit<Return><C-W>l
-" new right and edit
-nnoremap <leader>h :vsplit<Return><C-W>l:e 
+nnoremap <leader>H :vsplit<Return><C-W>l
+" new right via edit
+nnoremap <leader>he :vsplit<Return><C-W>l:e 
+" new right via ranger
+nnoremap <leader>hr :vsplit<Return><C-W>l:Ranger<Return>
 
 """ Tabs
 " focus
@@ -148,19 +156,14 @@ nnoremap <leader>N :tabnew<Return>:e
 
 " turn highlighting on and off
 nnoremap <leader>3 :set hlsearch!<Return>
-
 " turn list mode on and off
 nnoremap <leader>4 :set list!<Return>
-
 " turn number mode on and off
 nnoremap <leader>1 :set number!<Return>
-
 " turn relativenumber mode on and off
 nnoremap <leader>2 :set relativenumber!<Return>
-
 " turn expandtab on and off
 nnoremap <leader><Tab> :set expandtab!<Return>
-
 " show digraphs
 nnoremap <leader>` :digraphs<Return>
 
