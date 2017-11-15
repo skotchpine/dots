@@ -90,9 +90,18 @@ endfunc
 
 " do it
 autocmd BufWrite *.c :call DeleteTrailingWhitespace()
+autocmd BufWrite *.cc :call DeleteTrailingWhitespace()
+autocmd BufWrite *.cpp :call DeleteTrailingWhitespace()
 autocmd BufWrite *.h :call DeleteTrailingWhitespace()
 autocmd BufWrite *.cs :call DeleteTrailingWhitespace()
 autocmd BufWrite *.rb :call DeleteTrailingWhitespace()
+autocmd BufWrite *.go :call DeleteTrailingWhitespace()
+autocmd BufWrite *.m :call DeleteTrailingWhitespace()
+autocmd BufWrite *.mm :call DeleteTrailingWhitespace()
+autocmd BufWrite *.hh :call DeleteTrailingWhitespace()
+autocmd BufWrite *.hs :call DeleteTrailingWhitespace()
+autocmd BufWrite *.elm :call DeleteTrailingWhitespace()
+autocmd BufWrite *.hpp :call DeleteTrailingWhitespace()
 autocmd BufWrite *.py :call DeleteTrailingWhitespace()
 autocmd BufWrite *.js* :call DeleteTrailingWhitespace()
 autocmd BufWrite *.css* :call DeleteTrailingWhitespace()
@@ -106,6 +115,8 @@ nnoremap <leader>u :redo
 
 " write buffer
 nnoremap <leader><leader> :w<Return>
+nnoremap <leader>w :w<Return>
+nnoremap <leader>W :w!<Return>
 
 " kill buffer
 nnoremap <leader>q :q<Return>
@@ -130,18 +141,14 @@ nnoremap <leader>S <C-W>J
 nnoremap <leader>D <C-W>K
 nnoremap <leader>F <C-W>L
 
-" new above
+" new above (blank, via edit, via ranger)
 nnoremap <leader>G :split<Return><C-W>j
-" new above via edit
 nnoremap <leader>ge :split<Return><C-W>j:e 
-" new above via ranger
 nnoremap <leader>gr :split<Return><C-W>j:Ranger<Return>
 
-" new right
+" new right (blank, via edit, via ranger)
 nnoremap <leader>H :vsplit<Return><C-W>l
-" new right via edit
 nnoremap <leader>he :vsplit<Return><C-W>l:e 
-" new right via ranger
 nnoremap <leader>hr :vsplit<Return><C-W>l:Ranger<Return>
 
 """ Tabs
@@ -149,10 +156,15 @@ nnoremap <leader>hr :vsplit<Return><C-W>l:Ranger<Return>
 nnoremap <leader>. :tabnext<Return>
 nnoremap <leader>m :tabprev<Return>
 
-" new
-nnoremap <leader>n :tabnew<Return>
-" new and edit
-nnoremap <leader>N :tabnew<Return>:e 
+" new (blank, via edit, via ranger)
+nnoremap <leader>N :tabnew<Return>
+nnoremap <leader>ne :tabnew<Return>:e 
+nnoremap <leader>nr :tabnew<Return>:Ranger<Return>
+
+" create, open, close fold
+vnoremap <leader>z :fold<Return>
+vnoremap <leader>x :foldopen<Return>
+vnoremap <leader>c :foldclose<Return>
 
 " turn highlighting on and off
 nnoremap <leader>3 :set hlsearch!<Return>
