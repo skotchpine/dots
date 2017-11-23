@@ -1,5 +1,7 @@
-" don't rever to vi
+" don't revert to vi
 set nocompatible
+
+let &rtp = substitute(&rtp, $HOME."/\.vim", $rc_CFG_D."/vim", "g")
 
 execute pathogen#infect()
 
@@ -13,11 +15,10 @@ set noswapfile
 filetype on
 syntax on
 
-if has("gui_running")
-  set t_CO=256
-endif
+set t_CO=256
 set background=dark
-colorscheme molokai_dark
+colorscheme apprentice
+colorscheme blaquemagick
 
 set nocursorline
 set nocursorcolumn
@@ -31,6 +32,8 @@ set smartindent
 set smarttab
 set expandtab
 
+set backspace=2
+
 " How many spaces to use for >> commands
 set shiftwidth=2
 " How many spaces are in a Tab
@@ -39,14 +42,24 @@ set tabstop=2
 " set softtabstop=2
 
 """ Indentation specs
+autocmd FileType sh      setlocal expandtab shiftwidth=2 tabstop=2
+autocmd FileType bash    setlocal expandtab shiftwidth=2 tabstop=2
 autocmd FileType python  setlocal expandtab shiftwidth=4 tabstop=4
 autocmd FileType haskell setlocal expandtab shiftwidth=4 tabstop=4
 autocmd FileType js      setlocal expandtab shiftwidth=2 tabstop=2
+autocmd FileType json    setlocal expandtab shiftwidth=2 tabstop=2
+autocmd FileType javascript setlocal expandtab shiftwidth=2 tabstop=2
+autocmd FileType pug     setlocal expandtab shiftwidth=2 tabstop=2
+autocmd FileType sass    setlocal expandtab shiftwidth=2 tabstop=2
 autocmd FileType html    setlocal expandtab shiftwidth=2 tabstop=2
 autocmd FileType ruby    setlocal expandtab shiftwidth=2 tabstop=2
 autocmd FileType go      setlocal noexpandtab shiftwidth=2 tabstop=2
 autocmd FileType c       setlocal noexpandtab shiftwidth=2 tabstop=2
+autocmd FileType make    setlocal noexpandtab shiftwidth=2 tabstop=2
 autocmd FileType objc    setlocal noexpandtab shiftwidth=2 tabstop=2
+
+autocmd FileType yaml           setlocal expandtab shiftwidth=2 tabstop=2
+autocmd FileType docker-compose setlocal expandtab shiftwidth=2 tabstop=2
 
 " break lines automatically
 set linebreak
@@ -141,25 +154,28 @@ nnoremap <leader>S <C-W>J
 nnoremap <leader>D <C-W>K
 nnoremap <leader>F <C-W>L
 
-" new above (blank, via edit, via ranger)
+" new above (blank, via edit, ranger, ctrlp)
 nnoremap <leader>G :split<Return><C-W>j
 nnoremap <leader>ge :split<Return><C-W>j:e 
 nnoremap <leader>gr :split<Return><C-W>j:Ranger<Return>
+nnoremap <leader>gt :split<Return><C-W>j:CtrlP<Return>
 
-" new right (blank, via edit, via ranger)
+" new right (blank, via edit, ranger, ctrlp)
 nnoremap <leader>H :vsplit<Return><C-W>l
 nnoremap <leader>he :vsplit<Return><C-W>l:e 
 nnoremap <leader>hr :vsplit<Return><C-W>l:Ranger<Return>
+nnoremap <leader>ht :vsplit<Return><C-W>l:CtrlP<Return>
 
 """ Tabs
 " focus
 nnoremap <leader>. :tabnext<Return>
 nnoremap <leader>m :tabprev<Return>
 
-" new (blank, via edit, via ranger)
+" new (blank, via edit, ranger, ctrlp)
 nnoremap <leader>N :tabnew<Return>
 nnoremap <leader>ne :tabnew<Return>:e 
 nnoremap <leader>nr :tabnew<Return>:Ranger<Return>
+nnoremap <leader>nt :tabnew<Return>:CtrlP<Return>
 
 " create, open, close fold
 vnoremap <leader>z :fold<Return>

@@ -1,10 +1,10 @@
 #!/bin/sh
 
-rm ~/.vim/manifest
+rm $VIM_D/manifest
 
 o=$(pwd)
-for x in ~/.vim/bundle/*; do
-	cd $x
-	git remote get-url origin >> ~/.vim/manifest
+for x in $VIM_D/bundle/*; do
+  cd $x
+  git remote get-url origin >> $VIM_D/manifest
 done
 cd $o
