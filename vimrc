@@ -58,6 +58,9 @@ autocmd FileType c       setlocal noexpandtab shiftwidth=2 tabstop=2
 autocmd FileType make    setlocal noexpandtab shiftwidth=2 tabstop=2
 autocmd FileType objc    setlocal noexpandtab shiftwidth=2 tabstop=2
 
+autocmd FileType scala   setlocal expandtab shiftwidth=2 tabstop=2
+autocmd FileType sbt     setlocal expandtab shiftwidth=2 tabstop=2
+
 autocmd FileType yaml           setlocal expandtab shiftwidth=2 tabstop=2
 autocmd FileType docker-compose setlocal expandtab shiftwidth=2 tabstop=2
 
