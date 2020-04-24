@@ -1,8 +1,6 @@
 " don't revert to vi
 set nocompatible
 
-let &rtp = substitute(&rtp, $HOME."/\.vim", $rc_CFG_D."/vim", "g")
-
 execute pathogen#infect()
 
 set encoding=utf8
@@ -17,11 +15,36 @@ syntax on
 
 set t_CO=256
 set background=dark
-colorscheme apprentice
-colorscheme blaquemagick
+"colorscheme apprentice
+"colorscheme blaquemagick
+"colorscheme 0x7A69_dark
+color blackboard
 
-set nocursorline
-set nocursorcolumn
+set cursorline
+set cursorcolumn
+hi clear CursorLine
+hi clear CursorColumn
+hi CursorLine term=reverse ctermbg=234
+hi CursorColumn term=reverse ctermbg=234
+
+if &term =~ "xterm\\|rxvt"
+  " use an orange cursor in insert mode
+  " let &t_SI = "\<Esc>]12;orange\x7"
+  " use a red cursor otherwise
+  " let &t_EI = "\<Esc>]12;red\x7"
+  " silent !echo -ne "\033]12;red\007"
+  " reset cursor when vim exits
+  " autocmd VimLeave * silent !echo -ne "\033]112\007"
+  " use \003]12;gray\007 for gnome-terminal
+endif
+
+"set noshowmode
+"set laststatus=0
+"set noshowcmd
+
+set showmode
+set laststatus=1
+set showcmd
 
 filetype plugin on
 filetype indent on
@@ -75,13 +98,16 @@ set nowrap
 
 set mouse=a
 " a mousy hack
-set ttymouse=xterm2
+if has("mouse_sgr")
+  set ttymouse=sgr
+else
+  set ttymouse=xterm2
+end
 
 set ruler
 set cmdheight=1
-set laststatus=1
 
-" set number
+"set nonumber
 " set relativenumber
 
 set wildmenu
@@ -89,6 +115,7 @@ set wildmenu
 set ignorecase
 set smartcase
 set hlsearch
+set incsearch
 set lazyredraw
 set magic
 
@@ -157,6 +184,9 @@ nnoremap <leader>S <C-W>J
 nnoremap <leader>D <C-W>K
 nnoremap <leader>F <C-W>L
 
+" add another CtrlP binding
+nnoremap <leader>t :CtrlP<Return>
+
 " new above (blank, via edit, ranger, ctrlp)
 nnoremap <leader>G :split<Return><C-W>j
 nnoremap <leader>ge :split<Return><C-W>j:e 
@@ -210,20 +240,31 @@ nnoremap <leader>:  viw<Esc>a]<Esc>bi[<Esc>lel
 nnoremap <leader>\  viw<Esc>a><Esc>bi<<Esc>lel
 nnoremap <leader>\| viw<Esc>a}<Esc>bi{<Esc>lel
 nnoremap <leader>#  viw<Esc>a}<Esc>bi#{<Esc>lel
+nnoremap <leader><  viw<Esc>a`<Esc>bi`<Esc>lel
 
 " move lines
-nnoremap J <Esc>:m .+1<Return>==
-nnoremap K <Esc>:m .-2<Return>==
-vnoremap J <Esc>:m '>+1<Return>gv=gv
-vnoremap K <Esc>:m '<-2<Return>gv=gv
+nnoremap <C-j> <Esc>:m .+1<Return>==
+nnoremap <C-k> <Esc>:m .-2<Return>==
+vnoremap <C-j> <Esc>:m '>+1<Return>gv=gv
+vnoremap <C-k> <Esc>:m '<-2<Return>gv=gv
 
 " escape quickly
 imap jj <Esc>
 
-set noexpandtab
+" Require clojure namespace
+nnoremap <leader>R :Require<Return>
+nnoremap <leader><C-r> :Require!<Return>
+
+set expandtab
 set listchars=tab:░▒,trail:·,eol:‾,nbsp:·
-set laststatus=2
+"set laststatus=2
 set list
 
+nnoremap <leader>P :Piggieback (figwheel-sidecar.repl-api/repl-env)<Return>
+
 let g:ranger_map_keys = 0
+let g:ranger_replace_netrw = 1
 map <leader>r :Ranger<Return>
+
+" Don't suggest opening some files
+let g:ctrlp_custom_ignore = 'node_modules\|compiled'
