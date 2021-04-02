@@ -13,12 +13,13 @@ set noswapfile
 filetype on
 syntax on
 
-set t_CO=256
+"set t_CO=256
 set background=dark
 "colorscheme apprentice
 "colorscheme blaquemagick
 "colorscheme 0x7A69_dark
-color blackboard
+"color blackboard
+color base16-railscasts
 
 set cursorline
 set cursorcolumn
