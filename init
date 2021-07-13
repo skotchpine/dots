@@ -1,15 +1,19 @@
 #!/bin/sh
 
-VIM_D=${VIM_D:$HOME/.vim}
+set -e
 
-git clone https://github.com/skotchpine/dots $VIM_D
-[[ $? == 0 ]] || exit 1
+VIM_D=${VIM_D:-$HOME/.vim}
+echo $VIM_D
+
+test -d $VIM_D || git clone https://github.com/skotchpine/dots $VIM_D
 
 for dir in autoload bundle; do
-  [ -d "$dir" ] || mkdir -p "$VIM_D/$dir"
+  test -d $VIM_D/$dir || mkdir -p $VIM_D/$dir
 done
 
-curl -o $VIM_D/autoload/pathogen.vim https://raw.githubusercontent.com/tpope/vim-pathogen/master/autoload/pathogen.vim
+pathogen_src=https://raw.githubusercontent.com/tpope/vim-pathogen/master/autoload/pathogen.vim
+pathogen_dest=$VIM_D/autoload/pathogen.vim
+test -f $pathogen_dest || curl $pathogen_src > $pathogen_dest
 
 origin=$(pwd)
 cd $VIM_D/bundle; {

@@ -1,10 +1,17 @@
 #!/bin/sh
 
+set -e
+
+VIM_D=${VIM_D:-$HOME/.vim}
+echo $VIM_D
+
 rm $VIM_D/manifest
 
 o=$(pwd)
 for x in $VIM_D/bundle/*; do
   cd $x
-  git remote get-url origin >> $VIM_D/manifest
+  plugin=$(git remote get-url origin)
+  echo $plugin
+  echo $plugin >> $VIM_D/manifest
 done
 cd $o

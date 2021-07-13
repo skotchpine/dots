@@ -15,11 +15,13 @@ syntax on
 
 "set t_CO=256
 set background=dark
-"colorscheme apprentice
+colorscheme apprentice
 "colorscheme blaquemagick
 "colorscheme 0x7A69_dark
 "color blackboard
-color base16-railscasts
+"color base16-railscasts
+
+set re=0
 
 set cursorline
 set cursorcolumn
@@ -65,28 +67,38 @@ set tabstop=2
 " Only affects editing ?
 " set softtabstop=2
 
+""" Swap filetypes
+call jspretmpl#register_tag('pug', 'pug')
+augroup filetypedetect
+  autocmd BufNewFile,BufRead,BufReadPost *.jsx set filetype=javascript
+  autocmd BufNewFile,BufRead,BufReadPost *.jsx JsPreTmpl
+augroup END
+
 """ Indentation specs
-autocmd FileType sh      setlocal expandtab shiftwidth=2 tabstop=2
-autocmd FileType bash    setlocal expandtab shiftwidth=2 tabstop=2
-autocmd FileType python  setlocal expandtab shiftwidth=4 tabstop=4
-autocmd FileType haskell setlocal expandtab shiftwidth=4 tabstop=4
-autocmd FileType js      setlocal expandtab shiftwidth=2 tabstop=2
-autocmd FileType json    setlocal expandtab shiftwidth=2 tabstop=2
-autocmd FileType javascript setlocal expandtab shiftwidth=2 tabstop=2
-autocmd FileType pug     setlocal expandtab shiftwidth=2 tabstop=2
-autocmd FileType sass    setlocal expandtab shiftwidth=2 tabstop=2
-autocmd FileType html    setlocal expandtab shiftwidth=2 tabstop=2
-autocmd FileType ruby    setlocal expandtab shiftwidth=2 tabstop=2
-autocmd FileType go      setlocal noexpandtab shiftwidth=2 tabstop=2
-autocmd FileType c       setlocal noexpandtab shiftwidth=2 tabstop=2
-autocmd FileType make    setlocal noexpandtab shiftwidth=2 tabstop=2
-autocmd FileType objc    setlocal noexpandtab shiftwidth=2 tabstop=2
-
-autocmd FileType scala   setlocal expandtab shiftwidth=2 tabstop=2
-autocmd FileType sbt     setlocal expandtab shiftwidth=2 tabstop=2
-
-autocmd FileType yaml           setlocal expandtab shiftwidth=2 tabstop=2
-autocmd FileType docker-compose setlocal expandtab shiftwidth=2 tabstop=2
+autocmd FileType sh              setlocal expandtab   shiftwidth=2 tabstop=2
+autocmd FileType bash            setlocal expandtab   shiftwidth=2 tabstop=2
+autocmd FileType python          setlocal expandtab   shiftwidth=4 tabstop=4
+autocmd FileType haskell         setlocal expandtab   shiftwidth=4 tabstop=4
+autocmd FileType js              setlocal expandtab   shiftwidth=2 tabstop=2
+autocmd FileType json            setlocal expandtab   shiftwidth=2 tabstop=2
+autocmd FileType javascript      setlocal expandtab   shiftwidth=2 tabstop=2
+autocmd FileType javascript.jsx  setlocal expandtab   shiftwidth=2 tabstop=2
+autocmd FileType javascriptreact setlocal expandtab   shiftwidth=2 tabstop=2
+autocmd FileType typescript      setlocal expandtab   shiftwidth=2 tabstop=2
+autocmd FileType typescript.jsx  setlocal expandtab   shiftwidth=2 tabstop=2
+autocmd FileType typescriptreact setlocal expandtab   shiftwidth=2 tabstop=2
+autocmd FileType pug             setlocal expandtab   shiftwidth=2 tabstop=2
+autocmd FileType sass            setlocal expandtab   shiftwidth=2 tabstop=2
+autocmd FileType html            setlocal expandtab   shiftwidth=2 tabstop=2
+autocmd FileType ruby            setlocal expandtab   shiftwidth=2 tabstop=2
+autocmd FileType go              setlocal noexpandtab shiftwidth=2 tabstop=2
+autocmd FileType c               setlocal noexpandtab shiftwidth=2 tabstop=2
+autocmd FileType make            setlocal noexpandtab shiftwidth=2 tabstop=2
+autocmd FileType objc            setlocal noexpandtab shiftwidth=2 tabstop=2
+autocmd FileType scala           setlocal expandtab   shiftwidth=2 tabstop=2
+autocmd FileType sbt             setlocal expandtab   shiftwidth=2 tabstop=2
+autocmd FileType yaml            setlocal expandtab   shiftwidth=2 tabstop=2
+autocmd FileType docker-compose  setlocal expandtab   shiftwidth=2 tabstop=2
 
 " break lines automatically
 set linebreak
@@ -229,9 +241,11 @@ nnoremap <leader><Tab> :set expandtab!<Return>
 " show digraphs
 nnoremap <leader>` :digraphs<Return>
 
-" tcomment line
-nnoremap <leader>/ :TComment<Return>
-nnoremap <leader>? :TCommentBlock<Return>
+" nerd comment line / block
+nnoremap <leader>/ :call NERDComment('', 'toggle')<Return>
+vnoremap <leader>/ :call NERDComment('', 'toggle')<Return>
+nnoremap <leader>? vip:call NERDComment('', 'toggle')<Return>
+noremap <leader>? ip:call NERDComment('', 'toggle')<Return>
 
 " surround things
 nnoremap <leader>"  viw<Esc>a"<Esc>bi"<Esc>lel
@@ -267,5 +281,39 @@ let g:ranger_map_keys = 0
 let g:ranger_replace_netrw = 1
 map <leader>r :Ranger<Return>
 
+"
+" NERDComment
+"
 " Don't suggest opening some files
 let g:ctrlp_custom_ignore = 'node_modules\|compiled'
+
+" Create default mappings
+let g:NERDCreateDefaultMappings = 1
+
+" Add spaces after comment delimiters by default
+let g:NERDSpaceDelims = 1
+
+" Use compact syntax for prettified multi-line comments
+let g:NERDCompactSexyComs = 1
+
+" Align line-wise comment delimiters flush left instead of following code indentation
+let g:NERDDefaultAlign = 'left'
+
+" Set a language to use its alternate delimiters by default
+let g:NERDAltDelims_java = 1
+
+" Allow commenting and inverting empty lines (useful when commenting a region)
+let g:NERDCommentEmptyLines = 1
+
+" Enable trimming of trailing whitespace when uncommenting
+let g:NERDTrimTrailingWhitespace = 1
+
+" Enable NERDCommenterToggle to check all selected lines is commented or not
+let g:NERDToggleCheckAllLines = 1
+
+"
+" Pug in React
+"
+autocmd FileType jsx JsPreTmpl
+autocmd FileType typescript syn clear foldBraces
+autocmd FileType typescript JsPreTmpl
