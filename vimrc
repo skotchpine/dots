@@ -1,6 +1,8 @@
 " don't revert to vi
 set nocompatible
 
+set viminfo+=n~/.config/viminfo
+
 execute pathogen#infect()
 
 set encoding=utf8
@@ -15,8 +17,8 @@ syntax on
 
 "set t_CO=256
 set background=dark
-colorscheme apprentice
-"colorscheme blaquemagick
+"colorscheme apprentice
+colorscheme blaquemagick
 "colorscheme 0x7A69_dark
 "color blackboard
 "color base16-railscasts

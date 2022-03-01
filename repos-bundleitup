@@ -1,0 +1,20 @@
+#!/bin/bash
+
+CODE_DIR=${CODE_DIR:-$HOME/code}
+MANIFESTS_DIR=${MANIFESTS_DIR:-$HOME/.vim/repos}
+
+mkdir -p $MANIFESTS_DIR.new
+
+for dir in $(ls $CODE_DIR); do
+  for repo in $(ls $CODE_DIR/$dir); do
+    [[ -d $CODE_DIR/$dir/$repo/.git ]] || continue
+    pushd $CODE_DIR/$dir/$repo >/dev/null
+    plugin=$(git remote get-url origin)
+    echo $dir: $plugin
+    echo $plugin >> $MANIFESTS_DIR.new/$dir
+    popd >/dev/null
+  done
+done
+
+mv $MANIFESTS_DIR $MANIFESTS_DIR.bak.$(date +'%H_%M_%S')
+mv $MANIFESTS_DIR.new $MANIFESTS_DIR

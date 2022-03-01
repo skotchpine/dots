@@ -1,0 +1,16 @@
+#!/bin/sh
+
+CODE_DIR=${CODE_DIR:-$HOME/code}
+MANIFESTS_DIR=${MANIFESTS_DIR:-$HOME/.vim/repos}
+
+mkdir -p $CODE_DIR
+pushd $CODE_DIR
+for manifest in $(ls $MANIFESTS_DIR); do
+  mkdir -p $CODE_DIR/$manifest
+  pushd $CODE_DIR/$manifest
+  for repo in $(cat $MANIFESTS_DIR/$manifest); do
+    git clone $repo &
+  done
+  popd
+done
+popd
