@@ -9,9 +9,9 @@ for dir in $(ls $CODE_DIR); do
   for repo in $(ls $CODE_DIR/$dir); do
     [[ -d $CODE_DIR/$dir/$repo/.git ]] || continue
     pushd $CODE_DIR/$dir/$repo >/dev/null
-    plugin=$(git remote get-url origin)
-    echo $dir: $plugin
-    echo $plugin >> $MANIFESTS_DIR.new/$dir
+    repo=$(git remote get-url origin)
+    echo $dir: $repo
+    echo $repo >> $MANIFESTS_DIR.new/$dir
     popd >/dev/null
   done
 done

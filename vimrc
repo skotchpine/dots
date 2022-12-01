@@ -17,11 +17,11 @@ syntax on
 
 "set t_CO=256
 set background=dark
-"colorscheme apprentice
-colorscheme blaquemagick
-"colorscheme 0x7A69_dark
-"color blackboard
-"color base16-railscasts
+" colorscheme apprentice
+" colorscheme blaquemagick
+" colorscheme 0x7A69_dark
+" color blackboard
+color base16-railscasts
 
 set re=0
 
@@ -74,6 +74,8 @@ call jspretmpl#register_tag('pug', 'pug')
 augroup filetypedetect
   autocmd BufNewFile,BufRead,BufReadPost *.jsx set filetype=javascript
   autocmd BufNewFile,BufRead,BufReadPost *.jsx JsPreTmpl
+  autocmd BufNewFile,BufRead,BufReadPost *.tsx set filetype=typescript
+  autocmd BufNewFile,BufRead,BufReadPost *.tsx JsPreTmpl
 augroup END
 
 """ Indentation specs
@@ -244,10 +246,10 @@ nnoremap <leader><Tab> :set expandtab!<Return>
 nnoremap <leader>` :digraphs<Return>
 
 " nerd comment line / block
-nnoremap <leader>/ :call NERDComment('', 'toggle')<Return>
-vnoremap <leader>/ :call NERDComment('', 'toggle')<Return>
-nnoremap <leader>? vip:call NERDComment('', 'toggle')<Return>
-noremap <leader>? ip:call NERDComment('', 'toggle')<Return>
+nnoremap <leader>/ :call nerdcommenter#Comment('', 'toggle')<Return>
+vnoremap <leader>/ :call nerdcommenter#Comment('', 'toggle')<Return>
+nnoremap <leader>? vip:call nerdcommenter#Comment('', 'toggle')<Return>
+noremap <leader>? ip:call nerdcommenter#Comment('', 'toggle')<Return>
 
 " surround things
 nnoremap <leader>"  viw<Esc>a"<Esc>bi"<Esc>lel
@@ -271,6 +273,9 @@ imap jj <Esc>
 " Require clojure namespace
 nnoremap <leader>R :Require<Return>
 nnoremap <leader><C-r> :Require!<Return>
+
+" Project search
+nnoremap <leader>z :Ag<Return>
 
 set expandtab
 set listchars=tab:░▒,trail:·,eol:‾,nbsp:·
