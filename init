@@ -18,6 +18,7 @@ test -f $pathogen_dest || curl $pathogen_src > $pathogen_dest
 origin=$(pwd)
 cd $VIM_D/bundle; {
   for repo in $(cat $VIM_D/manifest); do
-    git clone $repo
+    echo "test -d $(basename $repo | sed -e 's/\.git//') || git clone $repo"
+    test -d $(basename $repo | sed -e 's/\.git//') || git clone $repo
   done
 }; cd $origin

@@ -15,44 +15,14 @@ set noswapfile
 filetype on
 syntax on
 
-"set t_CO=256
-set background=dark
-" colorscheme apprentice
-" colorscheme blaquemagick
-" colorscheme 0x7A69_dark
-" color blackboard
-color base16-railscasts
+filetype plugin on
+filetype indent on
 
 set re=0
-
-set cursorline
-set cursorcolumn
-hi clear CursorLine
-hi clear CursorColumn
-hi CursorLine term=reverse ctermbg=234
-hi CursorColumn term=reverse ctermbg=234
-
-if &term =~ "xterm\\|rxvt"
-  " use an orange cursor in insert mode
-  " let &t_SI = "\<Esc>]12;orange\x7"
-  " use a red cursor otherwise
-  " let &t_EI = "\<Esc>]12;red\x7"
-  " silent !echo -ne "\033]12;red\007"
-  " reset cursor when vim exits
-  " autocmd VimLeave * silent !echo -ne "\033]112\007"
-  " use \003]12;gray\007 for gnome-terminal
-endif
-
-"set noshowmode
-"set laststatus=0
-"set noshowcmd
 
 set showmode
 set laststatus=1
 set showcmd
-
-filetype plugin on
-filetype indent on
 
 set autoindent
 set smartindent
@@ -105,11 +75,11 @@ autocmd FileType yaml            setlocal expandtab   shiftwidth=2 tabstop=2
 autocmd FileType docker-compose  setlocal expandtab   shiftwidth=2 tabstop=2
 
 " break lines automatically
-set linebreak
+set nolinebreak
 " But only for really long lines
 set textwidth=100
 " Show a line at 80 columns
-set colorcolumn=+80
+"set colorcolumn=+80
 " Don't ever wrap lines
 set nowrap
 
@@ -149,25 +119,26 @@ func! DeleteTrailingWhitespace()
 endfunc
 
 " do it
-autocmd BufWrite *.c :call DeleteTrailingWhitespace()
-autocmd BufWrite *.cc :call DeleteTrailingWhitespace()
-autocmd BufWrite *.cpp :call DeleteTrailingWhitespace()
-autocmd BufWrite *.h :call DeleteTrailingWhitespace()
-autocmd BufWrite *.cs :call DeleteTrailingWhitespace()
-autocmd BufWrite *.rb :call DeleteTrailingWhitespace()
-autocmd BufWrite *.go :call DeleteTrailingWhitespace()
-autocmd BufWrite *.m :call DeleteTrailingWhitespace()
-autocmd BufWrite *.mm :call DeleteTrailingWhitespace()
-autocmd BufWrite *.hh :call DeleteTrailingWhitespace()
-autocmd BufWrite *.hs :call DeleteTrailingWhitespace()
-autocmd BufWrite *.elm :call DeleteTrailingWhitespace()
-autocmd BufWrite *.hpp :call DeleteTrailingWhitespace()
-autocmd BufWrite *.py :call DeleteTrailingWhitespace()
-autocmd BufWrite *.js* :call DeleteTrailingWhitespace()
-autocmd BufWrite *.css* :call DeleteTrailingWhitespace()
-autocmd BufWrite *.html* :call DeleteTrailingWhitespace()
-autocmd BufWrite *.java* :call DeleteTrailingWhitespace()
-
+autocmd BufWrite * :call DeleteTrailingWhitespace()
+" autocmd BufWrite *.c :call DeleteTrailingWhitespace()
+" autocmd BufWrite *.cc :call DeleteTrailingWhitespace()
+" autocmd BufWrite *.cpp :call DeleteTrailingWhitespace()
+" autocmd BufWrite *.h :call DeleteTrailingWhitespace()
+" autocmd BufWrite *.cs :call DeleteTrailingWhitespace()
+" autocmd BufWrite *.rb :call DeleteTrailingWhitespace()
+" autocmd BufWrite *.go :call DeleteTrailingWhitespace()
+" autocmd BufWrite *.m :call DeleteTrailingWhitespace()
+" autocmd BufWrite *.mm :call DeleteTrailingWhitespace()
+" autocmd BufWrite *.hh :call DeleteTrailingWhitespace()
+" autocmd BufWrite *.hs :call DeleteTrailingWhitespace()
+" autocmd BufWrite *.elm :call DeleteTrailingWhitespace()
+" autocmd BufWrite *.hpp :call DeleteTrailingWhitespace()
+" autocmd BufWrite *.py :call DeleteTrailingWhitespace()
+" autocmd BufWrite *.js* :call DeleteTrailingWhitespace()
+" autocmd BufWrite *.css* :call DeleteTrailingWhitespace()
+" autocmd BufWrite *.html* :call DeleteTrailingWhitespace()
+" autocmd BufWrite *.java* :call DeleteTrailingWhitespace()
+"
 let mapleader=","
 
 " redo
@@ -206,13 +177,13 @@ nnoremap <leader>t :CtrlP<Return>
 
 " new above (blank, via edit, ranger, ctrlp)
 nnoremap <leader>G :split<Return><C-W>j
-nnoremap <leader>ge :split<Return><C-W>j:e 
+nnoremap <leader>ge :split<Return><C-W>j:e
 nnoremap <leader>gr :split<Return><C-W>j:Ranger<Return>
 nnoremap <leader>gt :split<Return><C-W>j:CtrlP<Return>
 
 " new right (blank, via edit, ranger, ctrlp)
 nnoremap <leader>H :vsplit<Return><C-W>l
-nnoremap <leader>he :vsplit<Return><C-W>l:e 
+nnoremap <leader>he :vsplit<Return><C-W>l:e
 nnoremap <leader>hr :vsplit<Return><C-W>l:Ranger<Return>
 nnoremap <leader>ht :vsplit<Return><C-W>l:CtrlP<Return>
 
@@ -223,7 +194,7 @@ nnoremap <leader>m :tabprev<Return>
 
 " new (blank, via edit, ranger, ctrlp)
 nnoremap <leader>N :tabnew<Return>
-nnoremap <leader>ne :tabnew<Return>:e 
+nnoremap <leader>ne :tabnew<Return>:e
 nnoremap <leader>nr :tabnew<Return>:Ranger<Return>
 nnoremap <leader>nt :tabnew<Return>:CtrlP<Return>
 
@@ -324,3 +295,20 @@ let g:NERDToggleCheckAllLines = 1
 autocmd FileType jsx JsPreTmpl
 autocmd FileType typescript syn clear foldBraces
 autocmd FileType typescript JsPreTmpl
+
+set t_CO=256
+set background=dark
+
+color apprentice
+" color blaquemagick
+" color 0x7A69_dark
+" color blackboard
+" color base16-railscasts
+
+set cursorline
+set cursorcolumn
+
+"hi clear CursorLine
+"hi clear CursorLineNr
+" hi CursorLine   cterm=none ctermbg=2 guibg=black
+" hi CursorColumn cterm=none ctermbg=2 guibg=black
