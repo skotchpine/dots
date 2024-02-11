@@ -1,4 +1,5 @@
 ssh://git@gitlab.com/tinker1/kodable-pizza
+ssh://git@gitlab.com/tinker1/pushupbot-app
 ssh://git@gitlab.com/tinker1/pushupbot-discord
 ssh://git@gitlab.com/tinker1/pushupbot-fastlane-certs
 ssh://git@gitlab.com/tinker1/pushupbot-teams

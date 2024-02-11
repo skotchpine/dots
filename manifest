@@ -14,7 +14,7 @@ git@github.com:junegunn/vim-easy-align
 git@github.com:elixir-editors/vim-elixir
 git@github.com:nathanaelkane/vim-indent-guides
 git@github.com:Quramy/vim-js-pretty-template
-git://github.com/digitaltoad/vim-pug.git
+git@github.com:digitaltoad/vim-pug
 git@github.com:vim-ruby/vim-ruby
 git@github.com:mhinz/vim-startify
 git@github.com:mg979/vim-visual-multi

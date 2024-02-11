@@ -17,6 +17,13 @@ syntax on
 
 filetype plugin on
 filetype indent on
+"set t_CO=256
+set background=dark
+" colorscheme apprentice
+" colorscheme blaquemagick
+" colorscheme 0x7A69_dark
+color blackboard
+" color base16-railscasts
 
 set re=0
 
@@ -263,7 +270,7 @@ map <leader>r :Ranger<Return>
 " NERDComment
 "
 " Don't suggest opening some files
-let g:ctrlp_custom_ignore = 'node_modules\|compiled'
+let g:ctrlp_custom_ignore = 'node_modules\|compiled\|srv'
 
 " Create default mappings
 let g:NERDCreateDefaultMappings = 1
